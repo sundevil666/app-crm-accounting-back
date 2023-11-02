@@ -1,4 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  CreateDateColumn,
+  UpdateDateColumn,
+  JoinColumn,
+} from 'typeorm';
 import { Category } from 'src/categories/entities/category.entity';
 import { OperationType } from 'src/common/operation-type.enum';
 
@@ -21,12 +29,15 @@ export class Record {
   operationType: OperationType;
 
   @CreateDateColumn()
-  createdDate: Date
+  createdDate: Date;
 
   @UpdateDateColumn()
-  updatedDate: Date
+  updatedDate: Date;
 
-  @ManyToOne(() => Category, (category) => category.records, {eager: true, onDelete: 'CASCADE', onUpdate: 'CASCADE'})
+  // @ManyToOne(() => Category, (category) => category.records, { eager: true, onDelete: 'CASCADE', onUpdate: 'CASCADE' })
+  // category: Category;
+
+  @ManyToOne(() => Category, category => category.records)
   category: Category;
-}
 
+}

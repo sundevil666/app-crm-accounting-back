@@ -1,9 +1,19 @@
-import { Controller, Post, Request, Body, UseGuards, UsePipes } from "@nestjs/common";
-import { CreateUserDto, CreateUserDtoSchema} from "./users/dto/create-user.dto";
-import { UsersService } from "./users/users.service";
-import { AuthGuard } from "@nestjs/passport";
-import { AuthService } from "./auth/auth.service";
-import { ZodValidationPipe} from "./pipies/ZodValidationPipe";
+import {
+  Controller,
+  Post,
+  Request,
+  Body,
+  UseGuards,
+  UsePipes,
+} from '@nestjs/common';
+import {
+  CreateUserDto,
+  CreateUserDtoSchema,
+} from './users/dto/create-user.dto';
+import { UsersService } from './users/users.service';
+import { AuthGuard } from '@nestjs/passport';
+import { AuthService } from './auth/auth.service';
+import { ZodValidationPipe } from './pipies/ZodValidationPipe';
 
 @Controller('api')
 export class AppController {
@@ -23,5 +33,4 @@ export class AppController {
   async login(@Request() req) {
     return this.authService.login(req.user);
   }
-
 }

@@ -28,6 +28,7 @@ import { join } from 'path';
       database: process.env.DB_DBNAME,
       entities: [Category, User, Record],
       synchronize: true,
+      logging: true,
     }),
     UsersModule,
     CategoriesModule,

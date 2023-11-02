@@ -1,4 +1,4 @@
-import * as bcrypt from 'bcrypt'
+import * as bcrypt from 'bcrypt';
 import { Injectable, BadRequestException } from '@nestjs/common';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -23,7 +23,7 @@ export class UsersService {
       const res = {
         id: user.id,
         ...this.generateToken(user),
-      }
+      };
       return res;
     } catch {
       throw new BadRequestException(

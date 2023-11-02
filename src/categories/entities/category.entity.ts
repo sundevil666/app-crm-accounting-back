@@ -1,4 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToMany,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { Record } from 'src/records/entities/record.entity';
 
 @Entity()
@@ -16,11 +23,11 @@ export class Category {
   limit: number;
 
   @CreateDateColumn()
-  createdDate: Date
+  createdDate: Date;
 
   @UpdateDateColumn()
-  updatedDate: Date
+  updatedDate: Date;
 
-  @OneToMany(type => Record, record => record.category, {cascade: true})
+  @OneToMany(() => Record, record => record.category)
   records: Record[];
 }

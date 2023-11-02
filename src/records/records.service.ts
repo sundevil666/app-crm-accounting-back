@@ -4,6 +4,7 @@ import { UpdateRecordDto } from './dto/update-record.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Record } from './entities/record.entity';
+import { Logger } from '@nestjs/common';
 
 @Injectable()
 export class RecordsService {
@@ -12,8 +13,13 @@ export class RecordsService {
     private repository: Repository<Record>
   ) {}
 
-  create(data: CreateRecordDto) {
-    return this.repository.save(data);
+  private readonly logger = new Logger(RecordsService.name);
+
+  async create(data: CreateRecordDto) {
+    this.logger.log(`Received data to save: ${JSON.stringify(data)}`);
+    const savedRecord = await this.repository.save(data); // Добавьте ключевое слово await
+    this.logger.log(`Saved record: ${JSON.stringify(savedRecord)}`);
+    return savedRecord;
   }
 
   async findAll(page: number, limit: number) {
@@ -30,7 +36,7 @@ export class RecordsService {
   }
 
   findOne(id: number) {
-    return this.repository.findOneBy({id});
+    return this.repository.findOneBy({ id });
   }
 
   update(id: number, data: UpdateRecordDto) {

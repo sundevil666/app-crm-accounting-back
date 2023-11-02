@@ -1,12 +1,24 @@
 import {
-  Controller, Get, Body, Patch, Param, Delete, UseGuards, UsePipes, Post, UploadedFile, UseInterceptors, Req, UnauthorizedException
+  Controller,
+  Get,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+  UsePipes,
+  Post,
+  UploadedFile,
+  UseInterceptors,
+  Req,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { UpdateUserDto, UpdateUserDtoSchema } from "./dto/update-user.dto";
-import { AuthGuard } from "@nestjs/passport";
+import { UpdateUserDto, UpdateUserDtoSchema } from './dto/update-user.dto';
+import { AuthGuard } from '@nestjs/passport';
 import { ParseIntPipe } from '@nestjs/common/pipes';
-import { ZodValidationPipe } from "../pipies/ZodValidationPipe";
-import { FileInterceptor } from "@nestjs/platform-express";
+import { ZodValidationPipe } from '../pipies/ZodValidationPipe';
+import { FileInterceptor } from '@nestjs/platform-express';
 import * as crypto from 'crypto';
 import * as fs from 'fs';
 import { extname } from 'path';
@@ -19,7 +31,7 @@ export class UsersController {
   constructor(
     private readonly usersService: UsersService,
     private jwtService: JwtService,
-    ) {}
+  ) {}
 
   @UseGuards(AuthGuard('jwt'))
   @Get()
